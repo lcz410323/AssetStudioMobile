@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">AssetStudio</string>
+    <string name="open_file">打开文件</string>
+    <string name="open_folder">打开文件夹</string>
+    <string name="export">导出</string>
+    <string name="replace_texture">替换贴图</string>
+    <string name="export_all">导出全部</string>
+    <string name="search_hint">搜索资产名称…</string>
+    <string name="no_assets">没有资产</string>
+    <string name="loading">正在加载…</string>
+</resources>
