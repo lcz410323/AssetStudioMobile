@@ -70,13 +70,13 @@ android {
         }
     }
 
-    // 自定义 APK 文件名输出逻辑
+    // 自定义 APK 文件名输出逻辑（已彻底修正 Kotlin 类型推导错误）
     applicationVariants.all { variant ->
         if (variant.buildType.name == "release") {
-            variant.outputs.configureEach {
-                val appName = "AssetStudioMobile" // 已修改为 AssetStudioMobile
-                (this as com.android.build.gradle.internal.api.BaseVariantOutputImpl).outputFileName =
-                    "${appName}_v${variant.versionName}_${variant.buildType.name}.apk"
+            variant.outputs.all {
+                val outputImpl = this as? com.android.build.gradle.internal.api.BaseVariantOutputImpl
+                val appName = "AssetStudioMobile"
+                outputImpl?.outputFileName = "${appName}_v${variant.versionName}_${variant.buildType.name}.apk"
             }
         }
     }
