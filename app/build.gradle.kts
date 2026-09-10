@@ -70,15 +70,16 @@ android {
         }
     }
 
-    // 自定义 APK 文件名输出逻辑（已彻底修正 Kotlin 类型推导错误）
+    // 修复 Kotlin DSL 闭包类型推導错误的重命名逻辑
     applicationVariants.all { variant ->
         if (variant.buildType.name == "release") {
-            variant.outputs.all {
-                val outputImpl = this as? com.android.build.gradle.internal.api.BaseVariantOutputImpl
-                val appName = "AssetStudioMobile"
-                outputImpl?.outputFileName = "${appName}_v${variant.versionName}_${variant.buildType.name}.apk"
+            variant.outputs.forEach { output ->
+                if (output is com.android.build.gradle.internal.api.BaseVariantOutputImpl) {
+                    output.outputFileName = "AssetStudioMobile_v${variant.versionName}_${variant.buildType.name}.apk"
+                }
             }
         }
+        true
     }
 }
 
