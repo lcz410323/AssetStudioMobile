@@ -70,18 +70,16 @@ android {
         }
     }
 
-    // ==================== 在这里添加重命名逻辑 ====================
+    // 自定义 APK 文件名输出逻辑
     applicationVariants.all { variant ->
         if (variant.buildType.name == "release") {
-            variant.outputs.all { output ->
-                val projectOutput = output as com.android.build.gradle.internal.api.BaseVariantOutputImpl
-                val appName = "AssetStudioMobile" // 你希望使用的应用名称
-                // 输出文件名示例：AssetStudioMobile_v1.10.2_release.apk
-                projectOutput.outputFileName = "${appName}_v${variant.versionName}_${variant.buildType.name}.apk"
+            variant.outputs.configureEach {
+                val appName = "AssetStudioMobile" // 已修改为 AssetStudioMobile
+                (this as com.android.build.gradle.internal.api.BaseVariantOutputImpl).outputFileName =
+                    "${appName}_v${variant.versionName}_${variant.buildType.name}.apk"
             }
         }
     }
-    // ==============================================================
 }
 
 dependencies {
